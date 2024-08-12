@@ -1,0 +1,4 @@
+- Fix the change speed button
+- Clean up the segments to be table format
+- Fix the time until last save bumping down when it starts
+- Fix the time until last save not resetting on save
