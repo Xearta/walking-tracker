@@ -365,22 +365,31 @@ const Dashboard = () => {
         >
           {isWalking ? "Stop Walking" : "Start Walking"}
         </button>
-        <button onClick={() => setIsModalOpen(true)}>Change Speed</button>
+
+        <div style={styles.headerButtons}>
+          <button
+            style={{ ...styles.button, ...styles.changeSpeedButton }}
+            onClick={() => setIsModalOpen(true)}
+          >
+            Change Speed
+          </button>
+          <div style={styles.saveContainer}>
+            <button
+              style={{ ...styles.button, ...styles.saveButton }}
+              onClick={saveStepsToFirestore}
+            >
+              Save
+            </button>
+            <p style={styles.timer}>Time since last save: </p>
+            <p>{formatTime(timeSinceLastSave * 1000)}</p>
+          </div>
+        </div>
+
         <SpeedOptionsModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onSpeedChange={handleSpeedChange}
         />
-        <div style={styles.saveContainer}>
-          <button
-            style={{ ...styles.button, ...styles.saveButton }}
-            onClick={saveStepsToFirestore}
-          >
-            Save
-          </button>
-          <p style={styles.timer}>Time since last save: </p>
-          <p>{formatTime(timeSinceLastSave * 1000)}</p>
-        </div>
       </div>
 
       <div style={styles.currentSpeedBox}>
@@ -546,12 +555,14 @@ const styles = {
     maxWidth: "600px",
     marginBottom: "10px",
     position: "relative",
+    alignItems: "center",
   },
   saveContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     marginLeft: "auto",
+    position: "relative",
   },
   currentSpeedBox: {
     backgroundColor: "#3C3C3C",
@@ -628,15 +639,43 @@ const styles = {
     margin: "10px",
     borderRadius: "5px",
     cursor: "pointer",
+    transition: "background-color 0.3s ease, transform 0.3s ease",
+  },
+  changeSpeedButton: {
+    backgroundColor: "#FFC107", // Adjusted background color for better contrast
+    color: "#333", // Dark text color for better readability
+    border: "none",
+    padding: "4px 8px", // Adjust padding to make it shorter and less wide
+    fontSize: "14px", // Smaller font size
+    margin: "2px", // Reduced margin
+    borderRadius: "5px",
+    cursor: "pointer",
     transition: "background-color 0.3s ease",
+    minWidth: "80px", // Ensure the button is not too narrow
+    minHeight: "40px",
+    fontWeight: "bold",
+    textAlign: "center", // Center the text
+  },
+  buttonHover: {
+    backgroundColor: "#FFB300", // Darker shade for hover effect
+  },
+  buttonFocus: {
+    outline: "none",
+    boxShadow: "0 0 0 3px rgba(255, 193, 7, 0.5)", // Highlight effect for focus
   },
   startButton: {
+    minHeight: "150px",
+    minWidth: "150px",
     backgroundColor: "#4CAF50",
   },
   stopButton: {
+    minHeight: "150px",
+    minWidth: "150px",
     backgroundColor: "#F44336",
   },
   saveButton: {
+    minWidth: "115px",
+    fontWeight: "bold",
     backgroundColor: "#4CAF50",
   },
   segmentButton: {
