@@ -23,9 +23,6 @@ const Dashboard = () => {
   const [isSegmentActive, setIsSegmentActive] = useState(false);
   const [segmentSteps, setSegmentSteps] = useState(0);
   const [segments, setSegments] = useState([]);
-  const [intervalId, setIntervalId] = useState(null);
-  const [saveIntervalId, setSaveIntervalId] = useState(null);
-  const [timerIntervalId, setTimerIntervalId] = useState(null);
   const [timeSinceLastSave, setTimeSinceLastSave] = useState(0);
   const [walkStartTime, setWalkStartTime] = useState(null);
 
@@ -125,8 +122,6 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    let stepIntervalId, saveIntervalId, timerIntervalId;
-
     if (isWalking) {
       setWalkStartTime(Date.now());
 
@@ -168,7 +163,6 @@ const Dashboard = () => {
     } else {
       // Stop walking
       if (walkStartTime) {
-        const elapsed = Date.now() - walkStartTime;
         setWalkStartTime(null);
       }
 
@@ -328,18 +322,6 @@ const Dashboard = () => {
       setSegments(fetchedSegments);
     } catch (error) {
       console.error("Error saving segment: ", error);
-    }
-  };
-
-  const deleteSegmentFromFirestore = async (segmentId) => {
-    try {
-      await setDoc(doc(db, "segments", segmentId), {
-        deleted: true, // Optional: Mark as deleted instead of actually deleting
-      });
-      // Alternatively, if you want to actually delete:
-      // await deleteDoc(doc(db, "segments", segmentId));
-    } catch (error) {
-      console.error("Error deleting segment:", error);
     }
   };
 
