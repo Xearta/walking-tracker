@@ -393,9 +393,18 @@ const Dashboard = () => {
       </div>
 
       <div style={styles.currentSpeedBox}>
-        <p style={styles.speedLabel}>Current Speed: {currentSpeed} mph</p>
-        <p style={styles.speedValue}>Steps Per Second: {stepsPerSecond}</p>
+        <div style={styles.statItem}>
+          <span style={styles.speedIcon}>🚀</span> {/* Speed icon */}
+          <p style={{ ...styles.statLabel, marginRight: "8px" }}>Speed: </p>
+          <p style={styles.statValue}>{currentSpeed} mph</p>
+        </div>
+        <div style={styles.statItem}>
+          <span style={styles.stepIcon}>👣</span> {/* Steps icon */}
+          <p style={{ ...styles.statLabel, marginRight: "8px" }}>Steps/sec: </p>
+          <p style={styles.statValue}>{stepsPerSecond}</p>
+        </div>
       </div>
+
       {/* Start Segment Button and Stats */}
       <div style={styles.statsContainer}>
         <button
@@ -567,12 +576,42 @@ const styles = {
   currentSpeedBox: {
     backgroundColor: "#3C3C3C",
     borderRadius: "8px",
-    padding: "15px",
     margin: "5px",
     textAlign: "center",
     width: "calc(100% - 40px)",
     marginBottom: "20px",
+    maxWidth: "500px",
     display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+  },
+  statItem: {
+    display: "flex",
+    alignItems: "center",
+    margin: "0 15px",
+    fontSize: "16px",
+  },
+  speedIcon: {
+    width: "24px",
+    height: "24px",
+    marginRight: "8px",
+  },
+  stepIcon: {
+    width: "24px",
+    height: "24px",
+    marginRight: "8px",
+    filter: "invert(1)",
+  },
+  statLabel: {
+    color: "#E0E0E0",
+    marginRight: "8px", // Added space between label and value
+    fontSize: "16px",
+  },
+  statValue: {
+    color: "#E0E0E0",
+    fontSize: "16px",
+    fontWeight: "bold",
   },
   statsContainer: {
     display: "flex",
