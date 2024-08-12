@@ -1,3 +1,5 @@
 - Fix the time until last save bumping down when it starts
 - Fix the time until last save not resetting on save
 - Change a lot of things to icons instead of text
+
+- Deploy to GitHub Pages
