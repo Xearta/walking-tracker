@@ -406,7 +406,7 @@ const Dashboard = () => {
         <p style={styles.speedValue}>Steps Per Second: {stepsPerSecond}</p>
       </div>
       {/* Start Segment Button and Stats */}
-      <div style={styles.buttonsContainer}>
+      <div style={styles.statsContainer}>
         <button
           style={{
             ...styles.button,
@@ -424,20 +424,22 @@ const Dashboard = () => {
             ...(isSegmentActive && styles.activeSegmentStatsContainer),
           }}
         >
-          <div style={styles.statBox}>
-            <p style={styles.statLabel}>Segment Steps</p>
-            <p style={styles.statValue}>
-              {formatNumberWithCommasAndDecimals(segmentSteps, 0)}
-            </p>
-          </div>
-          <div style={styles.statBox}>
-            <p style={styles.statLabel}>Segment Miles</p>
-            <p style={styles.statValue}>
-              {formatNumberWithCommasAndDecimals(
-                convertStepsToMiles(segmentSteps),
-                2
-              )}
-            </p>
+          <div style={styles.statRow}>
+            <div style={styles.statBox}>
+              <p style={styles.statLabel}>Segment Steps</p>
+              <p style={styles.statValue}>
+                {formatNumberWithCommasAndDecimals(segmentSteps, 0)}
+              </p>
+            </div>
+            <div style={styles.statBox}>
+              <p style={styles.statLabel}>Segment Miles</p>
+              <p style={styles.statValue}>
+                {formatNumberWithCommasAndDecimals(
+                  convertStepsToMiles(segmentSteps),
+                  2
+                )}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -625,13 +627,6 @@ const styles = {
     textAlign: "center",
     width: "calc(100% - 40px)",
   },
-  segmentStatsContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-    maxWidth: "600px",
-    marginTop: "5px",
-  },
   statLabel: {
     fontSize: "14px",
     color: "#B0B0B0",
@@ -639,13 +634,6 @@ const styles = {
   statValue: {
     fontSize: "18px",
     fontWeight: "bold",
-  },
-  buttonsContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: "5px",
-    marginBottom: "20px",
   },
   button: {
     border: "none",
@@ -678,7 +666,7 @@ const styles = {
   segmentStatsContainer: {
     display: "flex",
     justifyContent: "space-between",
-    width: "100%",
+    width: "80%",
     maxWidth: "600px",
     marginTop: "5px",
     backgroundColor: "#FFD54F", // Yellow background for Segment Stats
@@ -695,7 +683,8 @@ const styles = {
   segmentsContainer: {
     marginTop: "20px",
     width: "100%",
-    maxWidth: "800px", // Increased width for better table display
+    maxWidth: "600px",
+    overflowX: "auto", // Allows horizontal scrolling on small screens
   },
   segmentTable: {
     width: "100%",
